@@ -5,6 +5,6 @@ import Register from './register/register';
 import Dashboard from './dashboard/dashboard';
 import Landing from "./Landing/landing";
 import Authenticate from "./authenticate/authenticate";
-import Audio from './audio/audio'
+import Audio from './audio/dictaphone'
 
 export { Footer, Header, Login, Register, Dashboard, Landing, Authenticate, Audio }
