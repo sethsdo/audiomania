@@ -8,7 +8,7 @@ import {LOGOUT} from '../../state/actions/types';
 import { logout } from '../../state/actions/authActions';
 
 
-class Logout extends Component {
+export class Logout extends Component {
     handleSignout(e) {
         this.props.logout()
     }

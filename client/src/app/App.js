@@ -4,7 +4,7 @@ import GridList from 'material-ui/GridList';
 
 import { connect } from 'react-redux';
 
-import { Header, Footer, Login, Register, Dashboard, Landing, NotFound, Authenticate } from './components';
+import { Header, Footer, Login, Register, Dashboard, Landing, NotFound, Authenticate, Audio } from './components';
 
 import './App.css';
 import { attemptAuth } from './state/actions/authActions';
@@ -24,11 +24,11 @@ class App extends Component {
       if (this.props.match.path === '/') {
         return this.props.history.push('/dashboard')
       }
-      return
+      return 
     }
     this.props.attemptAuth()
       .then(_ => {})
-      .catch(_ => this.props.history.replace('/'));
+      .catch(_ => this.props.history.replace('/login'));
   }
 
   render() {
@@ -36,6 +36,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
+            <Route path="" component={Audio} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Register} />
             <PrivateRoute path="/dashboard" isAuthenticated={this.props.isAuthenticated} component={Dashboard} />
@@ -59,8 +60,13 @@ const mapDispatchToProps = (dispatch, otherprops) => {
       return new Promise((resolve, reject) => {
         attemptAuth()
           .then(({ data }) => {
+            if (data) {
+              console.log(data, "inmain app");
+              dispatch({ type: SIGNING_IN_SUCCESS, payload: data })
+              return window.location.href = '/Dashboard';
+            }
             console.log(data, "in main app");
-            dispatch({ type: SIGNING_IN_SUCCESS, payload: data })
+            dispatch({ type: SIGNING_IN_ERROR })
             resolve();
           })
           .catch(err => {

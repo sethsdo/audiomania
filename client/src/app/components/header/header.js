@@ -7,6 +7,7 @@ import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import AppBar from 'material-ui/AppBar';
 
 import { connect } from 'react-redux';
+import {Logout } from '../logout/logout';
 
 import styles from './header.css'
 
@@ -23,7 +24,7 @@ const Menu = (props) => (
     >
         <Link to="/login" ><MenuItem primaryText="Log In"/></Link>
         <Link to="/signup" ><MenuItem primaryText="Sign Up"/></Link>
-        <MenuItem primaryText="Sign out" onClick={handleSignout}/>
+        <MenuItem primaryText="Sign out" onClick={Logout}/>
         <Link to="/dashboard" ><MenuItem primaryText="Dashboard"/></Link>
     </IconMenu>
 );
@@ -41,17 +42,17 @@ class Header extends React.Component {
         )
     }
 }
-const handleSignout = (dispatch, props) => {
-    console.log("in sign out")
-    logout()
-        .then(data => {
-            console.log("signed out", data)
-            dispatch({ type: LOGOUT, payload: data })
-            props.history.push('/logout')
-        })
-        .catch(err => {
-            console.log("error", err)
-        })
-}
+// const handleSignout = (dispatch, props) => {
+//     console.log("in sign out")
+//     logout()
+//         .then(data => {
+//             console.log("signed out", data)
+//             dispatch({ type: LOGOUT, payload: data })
+//             props.history.push('/logout')
+//         })
+//         .catch(err => {
+//             console.log("error", err)
+//         })
+// }
 
-export default connect(null, handleSignout)(Header);
+export default Header;

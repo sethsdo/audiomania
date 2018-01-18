@@ -10,6 +10,7 @@ import { user } from '../../utils/models'
 import { register } from '../../state/actions/authActions';
 import { Header, Footer } from "../../components"
 import {attemptAuth} from '../../state/actions/authActions';
+import { SIGNING_IN_SUCCESS, SIGNING_IN_ERROR } from '../../state/actions/types';
 
 
 class Register extends Component {
@@ -105,7 +106,7 @@ const mapDispatchToProps = (dispatch, props) => {
                 .then(data => {
                     console.log("Register Event occurred and succeeded!", data);
                     dispatch({ type: SIGNING_IN_SUCCESS, payload: data })
-                    // props.history.push('/home')
+                    props.history.push('/dashboard')
                 })
                 .catch(err => {
                     console.error("Registration event occurred and failed :(.", err);
